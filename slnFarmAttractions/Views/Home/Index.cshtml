@@ -1,0 +1,28 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<slnFarmAttractions.Models.FarmAttractions>
+@{
+    ViewBag.Title = "全國休閒農業區旅遊資訊";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+
+<h2>全國休閒農業區旅遊資訊</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-md-4" style="margin-top:10px;">
+            <div class="img-thumbnail" style="width:100%; height:400px;">
+                <img src="@item.Photo" class="img-responsive" style="width:100%; height:210px;" alt="Alternate Text" />
+                <h4>@item.City - @item.Town</h4>
+                <p>電話: @item.Tel</p>
+                <p>地址: @item.Name</p>
+                <p><a href="https://www.google.com/maps/place/@item.Address" class="btn btn-success" target="_blank">地圖</a></p>
+            </div>
+        </div>
+    }
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
